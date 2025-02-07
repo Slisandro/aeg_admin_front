@@ -10,21 +10,26 @@ export const ITEMS_SIDEBAR : ItemSideBar[] = [
     {
         name: "Dashboard",
         Icon: HomeIcon,
+        route: "/"
     },
     {
         name: "Courses",
         Icon: CoursesIcon,
+        route: "/courses"
     },
     {
         name: "Users",
         Icon: UsersIcon,
+        route: "/users"
     },
     {
         name: "Clients",
         Icon: ClientsIcon,
+        route: "/clients"
     },
     {
         name: "Constancies",
         Icon: ConstanciesIcon,
+        route: "/constancies"
     },
 ]
