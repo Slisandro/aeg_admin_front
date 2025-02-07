@@ -1,16 +1,27 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HeaderComponent from './components/header-component';
 import SideBarComponent from './components/side-bar-component';
-import TableComponent from './components/table-component';
+import { DashboardPage } from './pages/dashboard';
+import { ClientsPage } from './pages/clients';
+import { CoursesPage } from './pages/courses';
+import { ConstanciesPage } from './pages/constancies';
+import { UsersPage } from './pages/users';
 
 function App() {
   return (
-    <main className="w-screen h-screen bg-white-500 grid grid-cols-[max-content_1fr] grid-rows-[max-content_1fr] gap-0">
-      <HeaderComponent />
-      <SideBarComponent />
-      <div className="w-full row-start-2 h-full p-6">
-        <TableComponent columns={["Name", "Email", "Password", "Id", ""]} />
-      </div>
-    </main>
+    <BrowserRouter>
+      <main className="w-screen h-screen bg-white-500 grid grid-cols-[max-content_1fr] grid-rows-[max-content_1fr] gap-0">
+        <HeaderComponent />
+        <SideBarComponent />
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+          <Route path="/constancies" element={<ConstanciesPage />} />
+          <Route path="/users" element={<UsersPage />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 
