@@ -1,4 +1,5 @@
 export default interface ItemSideBar {
     name: string,
-    Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+    Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>,
+    route: string
 }
