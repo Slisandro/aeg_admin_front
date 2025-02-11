@@ -17,13 +17,16 @@ export const ConstanciesPage = () => {
             <TableComponent 
                 columns={[
                     "id",
-                    "name",
-                    "email",
-                    "role"
+                    "startDate",
+                    "endDate",
+                    "user.name",
+                    "course.name",
+                    "client.name"
                 ]}
                 data={allConstancies.data.getAllConstancies}
                 countPerPage={10}
             />
+            {/* {JSON.stringify(allConstancies)} */}
         </div>
     )
 }
