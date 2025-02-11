@@ -8,6 +8,7 @@ export default function DropDownComponent ({ options, children, onSelect }: Prop
 
     const handleSelect = (option: Option) => {
         if (option) {
+            setIsOpen(!isOpen)
             onSelect(option)
         }
     }
