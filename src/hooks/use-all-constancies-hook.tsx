@@ -11,6 +11,20 @@ const fetchAllConstancies = async () => {
                 query {
                     getAllConstancies {
                         id
+                        startDate
+                        endDate
+                        user {
+                            name
+                            email
+                        }
+                        course {
+                            name
+                            duration
+                        }
+                        client {
+                            name
+                            code
+                        }
                     }
                 }
             `,
