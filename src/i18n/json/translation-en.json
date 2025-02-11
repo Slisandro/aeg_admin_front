@@ -1,0 +1,44 @@
+{
+    "sidebar": {
+        "home": "Dashboard",
+        "courses": "Courses",
+        "users": "Users",
+        "clients": "Clients",
+        "constancies": "Constancies"
+    },
+    "table": {
+        "action": {
+            "edit": "Edit"
+        },
+        "footer": {
+            "showing": "Showing",
+            "of": "of",
+            "action": {
+                "prev": "Previous",
+                "next": "Next"
+            }
+        }
+    },
+    "modules": {
+        "users": {
+            "statistics": {
+                "title": "Users created"
+            }
+        },
+        "clients": {
+            "statistics": {
+                "title": "Clients created"
+            }
+        },
+        "courses": {
+            "statistics": {
+                "title": "Courses created"
+            }
+        },
+        "constancies": {
+            "statistics": {
+                "title": "Constancies created"
+            }
+        }
+    }
+}

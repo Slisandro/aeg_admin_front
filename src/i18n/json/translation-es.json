@@ -1,0 +1,44 @@
+{
+    "sidebar": {
+        "home": "Inicio",
+        "courses": "Cursos",
+        "users": "Usuarios",
+        "clients": "Clientes",
+        "constancies": "Constancias"
+    },
+    "table": {
+        "action": {
+            "edit": "Editar"
+        },
+        "footer": {
+            "showing": "Mostrando",
+            "of": "de",
+            "action": {
+                "prev": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    },
+    "modules": {
+        "users": {
+            "statistics": {
+                "title": "Usuarios creados"
+            }
+        },
+        "clients": {
+            "statistics": {
+                "title": "Clientes creados"
+            }
+        },
+        "courses": {
+            "statistics": {
+                "title": "Cursos creados"
+            }
+        },
+        "constancies": {
+            "statistics": {
+                "title": "Constancias creados"
+            }
+        }
+    }
+}
