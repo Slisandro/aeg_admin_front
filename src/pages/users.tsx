@@ -22,7 +22,7 @@ export const UsersPage = () => {
                     "role"
                 ]}
                 data={allUsers.data.getAllUsers}
-                countPerPage={10}
+                countPerPage={allUsers.data.getAllUsers.length}
             />
         </div>
     )

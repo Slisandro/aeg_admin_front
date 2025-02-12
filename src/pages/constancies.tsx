@@ -24,7 +24,7 @@ export const ConstanciesPage = () => {
                     "client.name"
                 ]}
                 data={allConstancies.data.getAllConstancies}
-                countPerPage={10}
+                countPerPage={allConstancies.data.getAllConstancies.length}
             />
         </div>
     )

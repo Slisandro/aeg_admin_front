@@ -21,7 +21,7 @@ export const CoursesPage = () => {
                     "duration"
                 ]}
                 data={allCourses.data.getAllCourses}
-                countPerPage={10}
+                countPerPage={allCourses.data.getAllCourses.length}
             />
         </div>
     )
