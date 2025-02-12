@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import i18n from '../i18n/config';
 import { LanguageContext } from "../context/i18n-context";
 
-export default function TableComponent({ columns, data, countPerPage }: { columns: string[], data: any[], countPerPage: number }) {
+export default function TableComponent({ columns, columnsKey, data, countPerPage }: { columns: string[], data: any[], countPerPage: number, columnsKey: string[] }) {
     const { } = useContext(LanguageContext);
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState('asc');
@@ -60,7 +60,7 @@ export default function TableComponent({ columns, data, countPerPage }: { column
                 <TBody
                     sortedData={sortedData}
                     selectedRows={selectedRows}
-                    columns={columns}
+                    columnsKey={columnsKey}
                     handleSelectRow={handleSelectRow}
                 />
             </table>
@@ -112,8 +112,8 @@ const THead = (
 };
 
 const TBody = (
-    { sortedData, selectedRows, columns, handleSelectRow }
-        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columns: string[] }) => {
+    { sortedData, selectedRows, columnsKey, handleSelectRow }
+        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columnsKey: string[] }) => {
     return (
         <tbody>
             {sortedData.map(d => (
@@ -130,7 +130,7 @@ const TBody = (
                         </div>
                     </td>
 
-                    {columns.map(c => (
+                    {columnsKey.map(c => (
                         <td key={c} className="px-6 py-4">
                             {c.includes(".") ? c.split('.').reduce((o, i) => o[i], d) : d[c]}
                         </td>
@@ -150,17 +150,23 @@ const TFooter = (
         : { countPerPage: number, totalItems: number }
 ) => {
     return (
-        <nav className="flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
+        <nav className="fixed w-[90%] flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
             <span className="text-sm font-normal text-gray-500 dark:text-gray-400 lg:mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900 dark:text-white">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span></span>
             <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{i18n.t("table.footer.action.prev")}</button>
+                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white hidden lg:block">{i18n.t("table.footer.action.prev")}</button>
+                </li>
+                <li>
+                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden">{"<"}</button>
                 </li>
                 <li>
                     <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</button>
                 </li>
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{i18n.t("table.footer.action.next")}</button>
+                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden">{">"}</button>
+                </li>
+                <li>
+                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white hidden lg:block">{i18n.t("table.footer.action.next")}</button>
                 </li>
             </ul>
         </nav>
