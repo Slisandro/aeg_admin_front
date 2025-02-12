@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { ITEMS_SIDEBAR_DROPDOWN } from "../constants/ITEMS_SIDEBAR_DROPDOWN";
 import DropDownComponent from "./dropdown-component";
 import DropDownLanguagesComponent from "./languages-dropdown-component";
 import UserLoggedComponent from "./user-logged-component";
+import { LanguageContext } from "../context/i18n-context";
 
 export default function HeaderComponent() {
+    const {} = useContext(LanguageContext);
+    
     return (
         <header className="h-[70px] col-span-2 py-4 px-7 flex items-center justify-between bg-[#2D68A2] shadow-xl">
             <div className="lg:hidden flex gap-4 items-center">
