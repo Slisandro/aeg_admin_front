@@ -23,21 +23,51 @@
         "users": {
             "statistics": {
                 "title": "Usuarios creados"
+            },
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "name": "Nombre",
+                    "email": "Email",
+                    "role": "Rol"
+                }
             }
         },
         "clients": {
             "statistics": {
                 "title": "Clientes creados"
+            },
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "name": "Nombre",
+                    "representative": "Representante",
+                    "code": "Código"
+                }
             }
         },
         "courses": {
             "statistics": {
                 "title": "Cursos creados"
+            },
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "name": "Nombre",
+                    "duration": "Duración"
+                }
             }
         },
         "constancies": {
             "statistics": {
                 "title": "Constancias creados"
+            },
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "startDate": "Fecha de Inicio",
+                    "endDate": "Fecha de Finalización"
+                }
             }
         }
     }
