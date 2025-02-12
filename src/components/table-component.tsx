@@ -50,7 +50,7 @@ export default function TableComponent({ columns, data, countPerPage }: { column
 
     return (
         <div className="relative shadow-md w-full lg:max-w-[80vw] overflow-x-auto sm:rounded-lg w-full">
-            <table className="w-full overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-full whitespace-nowrap border-collapse overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <THead
                     columns={columns}
                     handleSelectAll={handleSelectAll}

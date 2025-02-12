@@ -22,7 +22,7 @@ export const ClientsPage = () => {
                     "code"
                 ]}
                 data={allClients.data.getAllClients}
-                countPerPage={10}
+                countPerPage={allClients.data.getAllClients.length}
             />
         </div>
     )
