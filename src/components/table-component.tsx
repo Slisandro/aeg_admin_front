@@ -50,7 +50,7 @@ export default function TableComponent({ columns, columnsKey, data, countPerPage
 
     return (
         <div className="relative shadow-md w-full lg:max-w-[80vw] overflow-x-auto sm:rounded-lg w-full">
-            <table className="w-full whitespace-nowrap border-collapse overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-full whitespace-nowrap border-collapse overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500">
                 <THead
                     columns={columns}
                     handleSelectAll={handleSelectAll}
@@ -78,14 +78,14 @@ const THead = (
             handleSort: (col: string) => void,
         }) => {
     return (
-        <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 bg-gray-50">
             <tr>
                 <th scope="col" className="p-4">
                     <div className="flex items-center">
                         <input
                             id="checkbox-all-search"
                             type="checkbox"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
                             onChange={handleSelectAll}
                         />
                     </div>
@@ -117,13 +117,13 @@ const TBody = (
     return (
         <tbody>
             {sortedData.map(d => (
-                <tr key={d.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr key={d.id} className="bg-white border-b border-gray-200 hover:bg-gray-50">
                     <td className="w-4 p-4">
                         <div className="flex items-center">
                             <input
                                 id="checkbox-table-search-1"
                                 type="checkbox"
-                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
                                 checked={selectedRows.includes(d.id)} // Enlaza el estado checked
                                 onChange={() => handleSelectRow(d.id)} // Llama a handleSelectRow al cambiar el checkbox
                             />
@@ -137,7 +137,7 @@ const TBody = (
                     ))}
 
                     <td className="px-6 py-4">
-                        <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline">{i18n.t("table.action.edit")}</button>
+                        <button className="font-medium text-blue-600 hover:underline">{i18n.t("table.action.edit")}</button>
                     </td>
                 </tr>
             ))}
@@ -151,22 +151,22 @@ const TFooter = (
 ) => {
     return (
         <nav className="fixed w-[90%] flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 lg:mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900 dark:text-white">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span></span>
+            <span className="text-sm font-normal text-gray-500 lg:mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900">{totalItems}</span></span>
             <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white hidden lg:block">{i18n.t("table.footer.action.prev")}</button>
+                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 hidden lg:block">{i18n.t("table.footer.action.prev")}</button>
                 </li>
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden">{"<"}</button>
+                    <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 lg:hidden">{"<"}</button>
                 </li>
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</button>
+                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</button>
                 </li>
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden">{">"}</button>
+                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 lg:hidden">{">"}</button>
                 </li>
                 <li>
-                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white hidden lg:block">{i18n.t("table.footer.action.next")}</button>
+                    <button className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 hidden lg:block">{i18n.t("table.footer.action.next")}</button>
                 </li>
             </ul>
         </nav>
