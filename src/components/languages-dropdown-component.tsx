@@ -21,6 +21,7 @@ export default function DropDownLanguagesComponent() {
             options={LANGUAGES}
             children={<ButtonLanguageComponent lang={lang} />}
             onSelect={handleChangeLanguage}
+            classNameDropdown="z-10 absolute w-[16rem] top-14 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
         />
     )
 }
