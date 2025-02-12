@@ -49,8 +49,8 @@ export default function TableComponent({ columns, data, countPerPage }: { column
     };
 
     return (
-        <div className="relative shadow-md max-w-[80vw] overflow-x-auto sm:rounded-lg w-full">
-            <table className="w-full overflow-x-scroll max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <div className="relative shadow-md w-full lg:max-w-[80vw] overflow-x-auto sm:rounded-lg w-full">
+            <table className="w-full overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <THead
                     columns={columns}
                     handleSelectAll={handleSelectAll}
@@ -150,8 +150,8 @@ const TFooter = (
         : { countPerPage: number, totalItems: number }
 ) => {
     return (
-        <nav className="flex items-center flex-column flex-wrap md:flex-row justify-between p-4">
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900 dark:text-white">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span></span>
+        <nav className="flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
+            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 lg:mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900 dark:text-white">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span></span>
             <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                 <li>
                     <button className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{i18n.t("table.footer.action.prev")}</button>
