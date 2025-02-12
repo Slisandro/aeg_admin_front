@@ -13,7 +13,7 @@ export const CoursesPage = () => {
     if (!allCourses.data?.getAllCourses) return <>Not found</>
 
     return (
-        <div className="w-full row-start-2 h-full p-6 flex items-start gap-0 justify-start">
+        <div className="w-full col-start-2 lg:row-start-2 h-full p-6 flex items-start gap-0 justify-start">
             <TableComponent
                 columns={[
                     "id",

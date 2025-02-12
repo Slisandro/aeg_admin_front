@@ -20,7 +20,7 @@ export const DashboardPage = () => {
     }
 
     return (
-        <div className="w-full row-start-2 h-full p-6 flex items-start gap-0 justify-start">
+        <div className="w-full col-span-2 lg:row-start-2 h-[max-content] p-6 flex flex-col sm:flex-row flex-wrap lg:flex-nowrap items-start gap-0 justify-start">
             <CardStatisticsComponent title={String(usersCount.data?.usersCount)} subtitle={i18n.t("modules.users.statistics.title")} Icon={ClientsIcon} />
             <CardStatisticsComponent title={String(clientsCount.data?.clientsCount)} subtitle={i18n.t("modules.clients.statistics.title")} Icon={ClientsIcon} />
             <CardStatisticsComponent title={String(coursesCount.data?.coursesCount)} subtitle={i18n.t("modules.courses.statistics.title")} Icon={ClientsIcon} />
