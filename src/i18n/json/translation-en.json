@@ -66,7 +66,16 @@
                 "columns": {
                     "id": "ID",
                     "startDate": "Start date",
-                    "endDate": "End date"
+                    "endDate": "End date",
+                    "user": {
+                        "name": "Name of User"
+                    },
+                    "course": {
+                        "name": "Name of Course"
+                    },
+                    "client": {
+                        "name": "Name of Client"
+                    }
                 }
             }
         }
