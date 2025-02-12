@@ -1,5 +1,6 @@
 import TableComponent from "../components/table-component";
 import { useAllConstancies } from "../hooks/use-all-constancies-hook"
+import i18n from "../i18n/config";
 
 export const ConstanciesPage = () => {
     const allConstancies = useAllConstancies();
@@ -15,13 +16,21 @@ export const ConstanciesPage = () => {
     return (
         <div className="w-full col-span-2 lg:row-start-2 h-full p-6 flex items-start gap-0 justify-start">
             <TableComponent 
-                columns={[
+                columnsKey={[
                     "id",
                     "startDate",
                     "endDate",
                     "user.name",
                     "course.name",
                     "client.name"
+                ]}
+                columns={[
+                    i18n.t("modules.constancies.table.columns.id"),
+                    i18n.t("modules.constancies.table.columns.startDate"),
+                    i18n.t("modules.constancies.table.columns.endDate"),
+                    i18n.t("modules.users.table.columns.name"),
+                    i18n.t("modules.courses.table.columns.name"),
+                    i18n.t("modules.clients.table.columns.name"),
                 ]}
                 data={allConstancies.data.getAllConstancies}
                 countPerPage={allConstancies.data.getAllConstancies.length}
