@@ -4,5 +4,6 @@ import { Option } from "./option-interface";
 export interface PropDropdown {
     options: Option[],
     children: ReactElement,
-    onSelect: (op: Option) => void;
+    onSelect: (op: Option) => void,
+    classNameDropdown: string
 }
