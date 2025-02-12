@@ -28,9 +28,9 @@ export const ConstanciesPage = () => {
                     i18n.t("modules.constancies.table.columns.id"),
                     i18n.t("modules.constancies.table.columns.startDate"),
                     i18n.t("modules.constancies.table.columns.endDate"),
-                    i18n.t("modules.users.table.columns.name"),
-                    i18n.t("modules.courses.table.columns.name"),
-                    i18n.t("modules.clients.table.columns.name"),
+                    i18n.t("modules.constancies.table.columns.user.name"),
+                    i18n.t("modules.constancies.table.columns.course.name"),
+                    i18n.t("modules.constancies.table.columns.client.name"),
                 ]}
                 data={allConstancies.data.getAllConstancies}
                 countPerPage={allConstancies.data.getAllConstancies.length}
