@@ -7,7 +7,7 @@ export default function CardStatisticsComponent ({ title, subtitle, Icon } : Car
                 <dt className="mb-2 text-3xl font-extrabold text-white">{title}</dt>
                 <dd className="text-gray-500 text-white">{subtitle}</dd>
             </div>
-            <Icon className="text-white fill-transparent w-10 h-10"/>
+            <Icon className="text-white fill-white w-10 h-10"/>
         </div>
     )
 }

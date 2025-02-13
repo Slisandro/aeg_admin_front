@@ -25,7 +25,7 @@ export const SideBarItem = (
         }
 ) => (
     <NavLink to={route} className="flex items-center justify-center gap-4 w-full h-10">
-        <Icon className="h-5 w-5 fill-transparent" />
+        <Icon className="h-5 w-5" />
         <p className="text-black text-xl w-1/2 font-medium">
             {i18n.t(name)}
         </p>
