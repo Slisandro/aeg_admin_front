@@ -59,13 +59,17 @@ export const ConstanciesPage = () => {
                 data={allConstancies}
                 countPerPage={allConstancies.length}
             />
-            <ModalComponent
-                    isModalOpen={isModalEditOpen}
-                    toggleModal={toggleModalEdit}
-                    children={<ConstancyFormComponent toggleModal={toggleModalEdit} entity={entity} />}
-                    title={i18n.t("modules.constancies.action.edit")}
-                    button={<></>}
-                />
+            {
+                entity && (
+                    <ModalComponent
+                        isModalOpen={isModalEditOpen}
+                        toggleModal={toggleModalEdit}
+                        children={<ConstancyFormComponent toggleModal={toggleModalEdit} entity={entity} />}
+                        title={i18n.t("modules.constancies.action.edit")}
+                        button={<></>}
+                    /> 
+                )
+            }
         </div>
     )
 }
