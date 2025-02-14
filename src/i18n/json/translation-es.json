@@ -8,7 +8,10 @@
     },
     "table": {
         "action": {
-            "edit": "Editar"
+            "edit": "Editar",
+            "create+": "Crear +",
+            "create": "Crear",
+            "cancel": "Cancelar"
         },
         "footer": {
             "showing": "Mostrando",
@@ -31,6 +34,10 @@
                     "email": "Email",
                     "role": "Rol"
                 }
+            },
+            "action": {
+                "create": "Crear Usuario",
+                "edit": "Editar Usuario"
             }
         },
         "clients": {
@@ -44,6 +51,10 @@
                     "representative": "Representante",
                     "code": "Código"
                 }
+            },
+            "action": {
+                "create": "Crear Cliente",
+                "edit": "Editar Cliente"
             }
         },
         "courses": {
@@ -56,6 +67,10 @@
                     "name": "Nombre",
                     "duration": "Duración"
                 }
+            },
+            "action": {
+                "create": "Crear Curso",
+                "edit": "Editar Curso"
             }
         },
         "constancies": {
@@ -77,6 +92,10 @@
                         "name": "Nombre del Cliente"
                     }
                 }
+            },
+            "action": {
+                "create": "Crear Constancia",
+                "edit": "Editar Constancia"
             }
         }
     }
