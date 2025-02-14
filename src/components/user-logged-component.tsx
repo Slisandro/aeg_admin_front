@@ -6,7 +6,7 @@ export default function UserLoggedComponent() {
             <UserWomanLogged />
             <div className="hidden lg:flex flex-col">
                 <p className="font-bold text-md text-white">Moni Roy</p>
-                <span className="text-white text-sm">Admin</span>
+                <span className="text-white text-sm">User</span>
             </div>
         </div>
     )
