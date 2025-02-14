@@ -14,14 +14,17 @@ const fetchAllConstancies = async () => {
                         startDate
                         endDate
                         user {
+                            id
                             name
                             email
                         }
                         course {
+                            id
                             name
                             duration
                         }
                         client {
+                            id
                             name
                             code
                         }
