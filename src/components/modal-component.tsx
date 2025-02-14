@@ -12,7 +12,7 @@ export default function ModalComponent({ title, button, children, isModalOpen, t
 
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="bg-white rounded-lg p-8 max-h-[90vh] lg:h-auto overflow-y-auto shadow-lg w-5/6 lg:w-1/2"> {/* Adjust width as needed */}
+                    <div className="bg-white rounded-lg p-8 max-h-[75vh] lg:h-auto overflow-y-auto shadow-lg w-5/6 lg:w-1/2"> {/* Adjust width as needed */}
                         <h2 className="text-2xl font-bold mb-4">{title}</h2>
                         {children}
                     </div>

@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 input,
+input[type="date"],
 select {
   -webkit-appearance: none;
+  background-color: transparent;
 }
