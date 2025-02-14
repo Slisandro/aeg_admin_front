@@ -37,11 +37,11 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
                 <div className="w-full flex flex-col lg:flex-row gap-2">
                     <div className="my-2 flex flex-col w-full lg:w-1/2 gap-2">
                         <label htmlFor="startDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.startDate")}</label>
-                        <input type='date' name="startDate" value={values.startDate} onChange={handleChange} id="startDate" className="px-2 py-3 outline-none border-2 rounded-lg border-[rgba(0,0,0,.25)]" />
+                        <input type='date' name="startDate" value={values.startDate} onChange={handleChange} id="startDate" className="appearance-none px-2 py-3 outline-none border-2 rounded-lg border-[rgba(0,0,0,.25)]" />
                     </div>
                     <div className="my-2 flex flex-col w-full lg:w-1/2 gap-2">
                         <label htmlFor="endDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.endDate")}</label>
-                        <input className="px-2 py-3 outline-none border-2 rounded-lg border-[rgba(0,0,0,.25)]" type='date' name="endDate" value={values.endDate} onChange={handleChange} id="endDate" />
+                        <input className="appearance-none px-2 py-3 outline-none border-2 rounded-lg border-[rgba(0,0,0,.25)]" type='date' name="endDate" value={values.endDate} onChange={handleChange} id="endDate" />
                     </div>
                 </div>
 
