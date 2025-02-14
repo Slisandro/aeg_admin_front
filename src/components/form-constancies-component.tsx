@@ -12,12 +12,15 @@ interface ConstanciesFormValues {
     courseId: string
 }
 
+const date = new Date();
+const formattedDate = date.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
 const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: ConstanciesFormValues }) => {
     const { allUsers, allClients, allCourses } = useStore();
     const initialValues: ConstanciesFormValues = {
         id: entity?.id ?? '',
-        startDate: entity?.startDate ?? '',
-        endDate: entity?.endDate ?? '',
+        startDate: entity?.startDate ?? formattedDate,
+        endDate: entity?.endDate ?? formattedDate,
         userId: entity?.userId ?? '',
         clientId: entity?.clientId ?? '',
         courseId: entity?.courseId ?? ''
@@ -45,7 +48,7 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
                     </div>
                 </div>
 
-                <div className="flex flex-col lg:row gap-2">
+                <div className="flex flex-col lg:flex-row gap-2">
                     <div className="my-2 flex flex-col w-full lg:w-1/3 w-full gap-2">
                         <label htmlFor="endDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.user.name")}</label>
                         <select name="userId" id="userId" value={values.userId} onChange={handleChange} className="px-2 py-3 outline-none border-2 rounded-lg border-[rgba(0,0,0,.25)]">
