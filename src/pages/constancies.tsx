@@ -1,21 +1,45 @@
+import { useContext, useEffect, useState } from "react";
+import ConstancyFormComponent from "../components/form-constancies-component";
+import ModalComponent from "../components/modal-component";
 import TableComponent from "../components/table-component";
-import { useAllConstancies } from "../hooks/use-all-constancies-hook"
 import i18n from "../i18n/config";
+import { useStore } from "../store";
+import { LanguageContext } from "../context/i18n-context";
 
 export const ConstanciesPage = () => {
-    const allConstancies = useAllConstancies();
+    const { } = useContext(LanguageContext);
+    const { allConstancies } = useStore();
+    const [isModalCreateOpen, setModalCreateOpen] = useState(false);
+    const [isModalEditOpen, setModalEditOpen] = useState(true);
+    const [entity, setEntity] = useState();
 
-    if(allConstancies.isLoading) return <>Loading</>
+    useEffect(() => {
+        if (entity) {
+            setModalEditOpen(true);
+        }
+    }, [entity])
 
-    if(allConstancies.error) {
-        alert(allConstancies.error);
-    }
+    const toggleModalCreate = () => setModalCreateOpen(!isModalCreateOpen);
+    const toggleModalEdit = () => {
+        setModalEditOpen(!isModalEditOpen);
+        setEntity(undefined)
+    };
 
-    if(!allConstancies.data?.getAllConstancies) return <>Not found</>
+    if (!allConstancies) return <>Not found</>
 
     return (
-        <div className="w-full col-span-2 lg:row-start-2 h-full p-6 flex items-start gap-0 justify-start">
-            <TableComponent 
+        <div className="w-full col-span-2 lg:row-start-2 h-full p-6 flex flex-col items-start gap-0 justify-start">
+            <div className="flex justify-end pb-4 px-4 w-full">
+                <ModalComponent
+                    isModalOpen={isModalCreateOpen}
+                    toggleModal={toggleModalCreate}
+                    children={<ConstancyFormComponent toggleModal={toggleModalCreate} />}
+                    title={i18n.t("modules.constancies.action.create")}
+                    button={<button className="bg-[#2d68a2] font-bolder text-white rounded-md py-2 px-4 mx-4 shadow-lg">{i18n.t("table.action.create+")}</button>}
+                />
+            </div>
+            <TableComponent
+                setEntity={setEntity}
                 columnsKey={[
                     "id",
                     "startDate",
@@ -32,9 +56,16 @@ export const ConstanciesPage = () => {
                     i18n.t("modules.constancies.table.columns.course.name"),
                     i18n.t("modules.constancies.table.columns.client.name"),
                 ]}
-                data={allConstancies.data.getAllConstancies}
-                countPerPage={allConstancies.data.getAllConstancies.length}
+                data={allConstancies}
+                countPerPage={allConstancies.length}
             />
+            <ModalComponent
+                    isModalOpen={isModalEditOpen}
+                    toggleModal={toggleModalEdit}
+                    children={<ConstancyFormComponent toggleModal={toggleModalEdit} entity={entity} />}
+                    title={i18n.t("modules.constancies.action.edit")}
+                    button={<></>}
+                />
         </div>
     )
 }
