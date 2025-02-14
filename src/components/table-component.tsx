@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import i18n from '../i18n/config';
 import { LanguageContext } from "../context/i18n-context";
 
-export default function TableComponent({ columns, columnsKey, data, countPerPage }: { columns: string[], data: any[], countPerPage: number, columnsKey: string[] }) {
+export default function TableComponent({ setEntity, columns, columnsKey, data, countPerPage }: { columns: string[], data: any[], countPerPage: number, columnsKey: string[], setEntity: React.Dispatch<React.SetStateAction<any>> }) {
     const { } = useContext(LanguageContext);
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState('asc');
@@ -48,6 +48,10 @@ export default function TableComponent({ columns, columnsKey, data, countPerPage
         }
     };
 
+    const handleEditRow = (t: any) => {
+        setEntity(t);
+    }
+
     return (
         <div className="relative shadow-md w-full lg:max-w-[80vw] overflow-x-auto sm:rounded-lg w-full">
             <table className="w-full whitespace-nowrap border-collapse overflow-x-scroll w-full lg:max-w-[80vw] table-auto text-sm text-left rtl:text-right text-gray-500">
@@ -62,6 +66,7 @@ export default function TableComponent({ columns, columnsKey, data, countPerPage
                     selectedRows={selectedRows}
                     columnsKey={columnsKey}
                     handleSelectRow={handleSelectRow}
+                    handleEditRow={handleEditRow}
                 />
             </table>
             <TFooter countPerPage={countPerPage} totalItems={data.length} />
@@ -112,8 +117,8 @@ const THead = (
 };
 
 const TBody = (
-    { sortedData, selectedRows, columnsKey, handleSelectRow }
-        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columnsKey: string[] }) => {
+    { sortedData, selectedRows, columnsKey, handleSelectRow, handleEditRow }
+        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columnsKey: string[], handleEditRow: React.Dispatch<React.SetStateAction<any>>}) => {
     return (
         <tbody>
             {sortedData.map(d => (
@@ -137,7 +142,7 @@ const TBody = (
                     ))}
 
                     <td className="px-6 py-4">
-                        <button className="font-medium text-blue-600 hover:underline">{i18n.t("table.action.edit")}</button>
+                        <button onClick={() => handleEditRow(d)} className="font-medium text-blue-600 hover:underline">{i18n.t("table.action.edit")}</button>
                     </td>
                 </tr>
             ))}
@@ -150,7 +155,7 @@ const TFooter = (
         : { countPerPage: number, totalItems: number }
 ) => {
     return (
-        <nav className="fixed w-[90%] flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
+        <nav className="fixed w-[90%] mt-4 lg:w-[80%] flex items-center flex-column flex-nowrap lg:flex-wrap md:flex-row justify-between p-4">
             <span className="text-sm font-normal text-gray-500 lg:mb-4 md:mb-0 block w-full md:inline md:w-auto">{i18n.t("table.footer.showing")} <span className="font-semibold text-gray-900">1-{countPerPage}</span> {i18n.t("table.footer.of")} <span className="font-semibold text-gray-900">{totalItems}</span></span>
             <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                 <li>
