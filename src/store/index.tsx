@@ -9,29 +9,29 @@ interface User {
 }
 
 interface StoreState {
-    allUsers: number | null,
-    getAllUsers: (n: number) => void,
+    allUsers: User[] | null,
+    getAllUsers: (n: User[]) => void,
 
     allClients: User[] | null,
-    getAllClients: (n: User[]) => void,
+    getAllClients: (n: any[]) => void,
 
-    allCourses: number | null,
-    getAllCourses: (n: number) => void,
+    allCourses: any[] | null,
+    getAllCourses: (n: any[]) => void,
 
-    allConstancies: number | null,
-    getAllConstancies: (n: number) => void,
+    allConstancies: any[] | null,
+    getAllConstancies: (n: any[]) => void,
 }
 
 export const useStore = create<StoreState>((set) => ({
     allUsers: null,
-    getAllUsers: (n: number) => set({ allUsers: n }),
+    getAllUsers: (n: User[]) => set({ allUsers: n }),
 
     allClients: null,
-    getAllClients: (n: User[]) => set({ allClients: n }),
+    getAllClients: (n: any[]) => set({ allClients: n }),
     
     allCourses: null,
-    getAllCourses: (n: number) => set({ allCourses: n }),
+    getAllCourses: (n: any[]) => set({ allCourses: n }),
     
     allConstancies: null,
-    getAllConstancies: (n: number) => set({ allConstancies: n }),
+    getAllConstancies: (n: any[]) => set({ allConstancies: n }),
 }));
