@@ -3,6 +3,8 @@ import useFormikHook from "../hooks/use-formik-hook";
 import { useStore } from '../store';
 import i18n from '../i18n/config';
 import * as Yup from 'yup';
+import { useCreateOrUpdateConstancy } from '../hooks/create-update-constancy-hook';
+import { useAllConstancies } from '../hooks/use-all-constancies-hook';
 
 interface ConstanciesFormValues {
     id: string,
@@ -25,6 +27,10 @@ const date = new Date();
 const formattedDate = date.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
 const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: ConstanciesFormValues }) => {
+    const { mutate } = useCreateOrUpdateConstancy();
+
+    const { refetch: refectAllConstancies } = useAllConstancies();
+
     const { allUsers, allClients, allCourses } = useStore();
     const initialValues: ConstanciesFormValues = {
         id: entity?.id ?? '',
@@ -37,8 +43,20 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!Object.keys(errors).length) {
-            toggleModal()
+        if (!Object.keys(errors).length) {
+            try {
+                mutate(values, {
+                    onSuccess: () => {
+                        refectAllConstancies();
+                        toggleModal();
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
         }
     };
 
@@ -98,7 +116,7 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
                         type="submit"
                         className="bg-[#2D68A2] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
-                        {i18n.t("table.action.create")}
+                        {entity ? i18n.t("modules.constancies.action.edit") : i18n.t("table.action.create")}
                     </button>
                 </div>
             </form>
