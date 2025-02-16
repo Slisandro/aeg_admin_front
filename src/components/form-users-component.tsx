@@ -2,6 +2,8 @@ import React from 'react';
 import useFormikHook from "../hooks/use-formik-hook";
 import i18n from '../i18n/config';
 import * as Yup from 'yup';
+import { useCreateOrUpdateUser } from '../hooks/create-update-user-hook';
+import { useAllUsers } from '../hooks/use-all-users-hook';
 
 interface UserFormValues { // Otra interfaz diferente
     id: string,
@@ -17,6 +19,10 @@ const UsersFormSchema = Yup.object().shape({
 });
 
 const UserFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: UserFormValues }) => {
+    const { mutate } = useCreateOrUpdateUser();
+
+    const { refetch: refectAllUsers } = useAllUsers();
+
     const initialValues: UserFormValues = {
         id: entity?.id ?? '',
         name: entity?.name ?? '',
@@ -26,8 +32,20 @@ const UserFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, e
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!Object.keys(errors).length) {
-            toggleModal()
+        if (!Object.keys(errors).length) {
+            try {
+                mutate(values, {
+                    onSuccess: () => {
+                        refectAllUsers();
+                        toggleModal();
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
         }
     };
 
