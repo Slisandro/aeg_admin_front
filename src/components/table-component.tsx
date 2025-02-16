@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import i18n from '../i18n/config';
 import { LanguageContext } from "../context/i18n-context";
 
-export default function TableComponent({ setEntity, columns, columnsKey, data, countPerPage }: { columns: string[], data: any[], countPerPage: number, columnsKey: string[], setEntity: React.Dispatch<React.SetStateAction<any>> }) {
+export default function TableComponent({ toggleDeleteItem, setEntity, columns, columnsKey, data, countPerPage }: { columns: string[], data: any[], countPerPage: number, columnsKey: string[], setEntity: React.Dispatch<React.SetStateAction<any>>, toggleDeleteItem: (i: string) => void }) {
     const { } = useContext(LanguageContext);
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState('asc');
@@ -66,6 +66,7 @@ export default function TableComponent({ setEntity, columns, columnsKey, data, c
                     selectedRows={selectedRows}
                     columnsKey={columnsKey}
                     handleSelectRow={handleSelectRow}
+                    toggleDeleteItem={toggleDeleteItem}
                     handleEditRow={handleEditRow}
                 />
             </table>
@@ -117,8 +118,8 @@ const THead = (
 };
 
 const TBody = (
-    { sortedData, selectedRows, columnsKey, handleSelectRow, handleEditRow }
-        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columnsKey: string[], handleEditRow: React.Dispatch<React.SetStateAction<any>>}) => {
+    { sortedData, selectedRows, columnsKey, handleSelectRow, handleEditRow, toggleDeleteItem }
+        : { sortedData: any[], selectedRows: string[], handleSelectRow: (row: string) => void, columnsKey: string[], handleEditRow: React.Dispatch<React.SetStateAction<any>>, toggleDeleteItem: (i: string) => void}) => {
     return (
         <tbody>
             {sortedData.map(d => (
@@ -141,8 +142,9 @@ const TBody = (
                         </td>
                     ))}
 
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 flex gap-2">
                         <button onClick={() => handleEditRow(d)} className="font-medium text-blue-600 hover:underline">{i18n.t("table.action.edit")}</button>
+                        <button onClick={() => toggleDeleteItem(d.id)} className="font-medium text-red-600 hover:underline">{i18n.t("table.action.delete")}</button>
                     </td>
                 </tr>
             ))}
