@@ -11,7 +11,8 @@
             "edit": "Editar",
             "create+": "Crear +",
             "create": "Crear",
-            "cancel": "Cancelar"
+            "cancel": "Cancelar",
+            "delete": "Borrar"
         },
         "footer": {
             "showing": "Mostrando",

@@ -11,7 +11,8 @@
             "edit": "Edit",
             "create+": "Create +",
             "create": "Create",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "delete": "Delete"
         },
         "footer": {
             "showing": "Showing",
