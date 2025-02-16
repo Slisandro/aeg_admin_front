@@ -5,10 +5,14 @@ import TableComponent from "../components/table-component";
 import { LanguageContext } from "../context/i18n-context";
 import i18n from "../i18n/config";
 import { useStore } from "../store";
+import { useDeleteClient } from "../hooks/delete-client-hook";
+import { useAllClients } from "../hooks/use-all-clients-hook";
 
 export const ClientsPage = () => {
     const { } = useContext(LanguageContext);
     const { allClients } = useStore();
+    const { mutate } = useDeleteClient();
+    const { refetch: refectAllClients } = useAllClients();
 
     const [isModalCreateOpen, setModalCreateOpen] = useState(false);
     const [isModalEditOpen, setModalEditOpen] = useState(true);
@@ -25,6 +29,22 @@ export const ClientsPage = () => {
         setModalEditOpen(!isModalEditOpen);
         setEntity(undefined)
     };
+    const toggleDeleteItem = (id: string) => {
+        if (id) {
+            try {
+                mutate({ id }, {
+                    onSuccess: () => {
+                        refectAllClients()
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
+        }
+    }
 
     if (!allClients) return <>Not found</>
 
@@ -50,6 +70,7 @@ export const ClientsPage = () => {
                 data={allClients}
                 countPerPage={allClients.length}
                 setEntity={setEntity}
+                toggleDeleteItem={toggleDeleteItem}
             />
             {entity && (
                 <ModalComponent
