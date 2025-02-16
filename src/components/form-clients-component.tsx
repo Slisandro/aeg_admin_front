@@ -2,6 +2,8 @@ import React from 'react';
 import useFormikHook from "../hooks/use-formik-hook";
 import i18n from '../i18n/config';
 import * as Yup from 'yup';
+import { useCreateOrUpdateClient } from '../hooks/create-update-client-hook';
+import { useAllClients } from '../hooks/use-all-clients-hook';
 
 interface ClientFormValues { // Otra interfaz diferente
     id: string,
@@ -17,6 +19,10 @@ const ClientFormSchema = Yup.object().shape({
 });
 
 const ClientFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: ClientFormValues }) => {
+    const { mutate } = useCreateOrUpdateClient();
+
+    const { refetch: refectAllClients } = useAllClients();
+
     const initialValues: ClientFormValues = {
         id: entity?.id ?? '',
         name: entity?.name ?? '',
@@ -26,14 +32,26 @@ const ClientFormComponent = ({ toggleModal, entity }: { toggleModal: () => void,
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!Object.keys(errors).length) {
-            toggleModal()
+        if (!Object.keys(errors).length) {
+            try {
+                mutate(values, {
+                    onSuccess: () => {
+                        refectAllClients();
+                        toggleModal();
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
         }
     };
 
     const { values, errors, handleChange, touched, handleBlur } = useFormikHook(initialValues, ClientFormSchema);
 
-    return ( 
+    return (
         <>
             <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit}>
                 <div className="my-2 flex flex-col w-full gap-2">
@@ -64,7 +82,7 @@ const ClientFormComponent = ({ toggleModal, entity }: { toggleModal: () => void,
                         type="submit"
                         className="bg-[#2D68A2] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
-                        {i18n.t("table.action.create")}
+                        {entity ? i18n.t("modules.clients.action.edit") : i18n.t("table.action.create")}
                     </button>
                 </div>
             </form>
