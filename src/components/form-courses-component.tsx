@@ -2,6 +2,8 @@ import React from 'react';
 import useFormikHook from "../hooks/use-formik-hook";
 import i18n from '../i18n/config';
 import * as Yup from 'yup';
+import { useCreateOrUpdateCourse } from '../hooks/create-update-course-hook';
+import { useAllCourses } from '../hooks/use-all-courses-hook';
 
 interface CoursesFormValues { // Otra interfaz diferente
     id: string,
@@ -15,6 +17,10 @@ const CourseFormSchema = Yup.object().shape({
 });
 
 const CourseFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: CoursesFormValues }) => {
+    const { mutate } = useCreateOrUpdateCourse();
+
+    const { refetch: refectAllCourses } = useAllCourses();
+
     const initialValues: CoursesFormValues = {
         id: entity?.id ?? '',
         name: entity?.name ?? '',
@@ -23,8 +29,20 @@ const CourseFormComponent = ({ toggleModal, entity }: { toggleModal: () => void,
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!Object.keys(errors).length) {
-            toggleModal()
+        if (!Object.keys(errors).length) {
+            try {
+                mutate(values, {
+                    onSuccess: () => {
+                        refectAllCourses();
+                        toggleModal();
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
         }
     };
 
@@ -35,7 +53,7 @@ const CourseFormComponent = ({ toggleModal, entity }: { toggleModal: () => void,
             <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit}>
                 <div className="my-2 flex flex-col w-full gap-2">
                     <label htmlFor="name" className="text-lg font-semibold">{i18n.t("modules.courses.table.columns.name")}</label>
-                    <input type='text' name="name" value={values.name} onChange={handleChange} id="name" className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.name && errors.name ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'}`} onBlur={handleBlur}/>
+                    <input type='text' name="name" value={values.name} onChange={handleChange} id="name" className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.name && errors.name ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'}`} onBlur={handleBlur} />
                     {touched.name && errors.name && (<p className="text-red-500 pl-2 font-bold">{errors.name}</p>)}
                 </div>
                 <div className="my-2 flex flex-col w-full w-full gap-2">
