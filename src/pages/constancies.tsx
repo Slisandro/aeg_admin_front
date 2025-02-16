@@ -5,10 +5,14 @@ import TableComponent from "../components/table-component";
 import i18n from "../i18n/config";
 import { useStore } from "../store";
 import { LanguageContext } from "../context/i18n-context";
+import { useDeleteConstancy } from "../hooks/delete-constancy-hook";
+import { useAllConstancies } from "../hooks/use-all-constancies-hook";
 
 export const ConstanciesPage = () => {
     const { } = useContext(LanguageContext);
     const { allConstancies } = useStore();
+    const { mutate } = useDeleteConstancy();
+    const { refetch: refectAllConstancies } = useAllConstancies();
     const [isModalCreateOpen, setModalCreateOpen] = useState(false);
     const [isModalEditOpen, setModalEditOpen] = useState(true);
     const [entity, setEntity] = useState();
@@ -24,6 +28,22 @@ export const ConstanciesPage = () => {
         setModalEditOpen(!isModalEditOpen);
         setEntity(undefined)
     };
+    const toggleDeleteItem = (id: string) => {
+        if (id) {
+            try {
+                mutate({ id }, {
+                    onSuccess: () => {
+                        refectAllConstancies()
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
+        }
+    }
 
     if (!allConstancies) return <>Not found</>
 
@@ -40,6 +60,7 @@ export const ConstanciesPage = () => {
             </div>
             <TableComponent
                 setEntity={setEntity}
+                toggleDeleteItem={toggleDeleteItem}
                 columnsKey={[
                     "id",
                     "startDate",
@@ -67,7 +88,7 @@ export const ConstanciesPage = () => {
                         children={<ConstancyFormComponent toggleModal={toggleModalEdit} entity={entity} />}
                         title={i18n.t("modules.constancies.action.edit")}
                         button={<></>}
-                    /> 
+                    />
                 )
             }
         </div>
