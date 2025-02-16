@@ -5,11 +5,14 @@ import TableComponent from "../components/table-component";
 import { LanguageContext } from "../context/i18n-context";
 import i18n from "../i18n/config";
 import { useStore } from "../store";
+import { useDeleteCourse } from "../hooks/delete-course-hook";
+import { useAllCourses } from "../hooks/use-all-courses-hook";
 
 export const CoursesPage = () => {
     const { } = useContext(LanguageContext);
     const { allCourses } = useStore();
-
+    const { mutate } = useDeleteCourse();
+    const { refetch: refectAllCourses } = useAllCourses();
     const [isModalCreateOpen, setModalCreateOpen] = useState(false);
     const [isModalEditOpen, setModalEditOpen] = useState(false);
     const [entity, setEntity] = useState();
@@ -25,6 +28,22 @@ export const CoursesPage = () => {
         setModalEditOpen(!isModalEditOpen);
         setEntity(undefined)
     };
+    const toggleDeleteItem = (id: string) => {
+        if (id) {
+            try {
+                mutate({ id }, {
+                    onSuccess: () => {
+                        refectAllCourses()
+                    },
+                    onError: (err) => {
+                        console.error("Mutacion error:", err)
+                    }
+                });
+            } catch (err) {
+                console.error("Error:", err)
+            }
+        }
+    }
 
     if (!allCourses) return <>Not found</>
 
@@ -41,6 +60,7 @@ export const CoursesPage = () => {
             </div>
             <TableComponent
                 setEntity={setEntity}
+                toggleDeleteItem={toggleDeleteItem}
                 columnsKey={[
                     "id",
                     "name",
