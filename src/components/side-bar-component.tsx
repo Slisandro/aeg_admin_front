@@ -11,7 +11,7 @@ export default function SideBarComponent() {
 
     return (
         <section className="hidden lg:flex h-full row-start-2 shadow-2xl w-[200px] flex flex-col items-center justify-start gap-10 py-12 bg-[#f7f7f8]">
-            {ITEMS_SIDEBAR.map(({ name, Icon, route }: ItemSideBar) => <SideBarItem route={route} name={name} Icon={Icon} />)}
+            {ITEMS_SIDEBAR.map(({ name, Icon, route }: ItemSideBar) => <SideBarItem key={route} route={route} name={name} Icon={Icon} />)}
         </section>
     )
 }
