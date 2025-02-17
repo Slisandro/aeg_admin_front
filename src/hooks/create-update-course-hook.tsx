@@ -14,15 +14,7 @@ const fetchCreateOrUpdateCourse = async ({ id, name, duration }: Course) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            query: id ? `
-                mutation createOrUpdateCourse($id: String!, $name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateCourse(id: $id, name: $name, representative: $representative, code: $code, entityType: $entityType)
-                }
-            ` : `
-                mutation createOrUpdateCourse($name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateCourse(name: $name, representative: $representative, code: $code, entityType: $entityType)
-                }
-            `,
+            query: id ? `mutation createOrUpdateCourse($id: String!, $name: String!, $duration: Int!, $entityType: String!) { createOrUpdateCourse(id: $id, name: $name, duration: $duration, entityType: $entityType)}` : `mutation createOrUpdateCourse($name: String!, $duration: Int!, $entityType: String!) { createOrUpdateCourse(name: $name, duration: $duration, entityType: $entityType)}`,
             variables: { ...variables, entityType: "course" },
         }),
     });
