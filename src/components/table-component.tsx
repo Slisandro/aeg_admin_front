@@ -97,7 +97,7 @@ const THead = (
                     </div>
                 </th>
                 {columns.map((col: string) => (
-                    <th scope="col" className="px-6 py-3 text-lg">
+                    <th key={col} scope="col" className="px-6 py-3 text-lg">
                         <div className="flex items-center" onClick={() => handleSort(col)}>
                             {col}
                             {
