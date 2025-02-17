@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement, useContext } from 'react';
 import { LanguageContext } from '../context/i18n-context';
 
 export default function ModalComponent({ title, button, children, isModalOpen, toggleModal }: { title: string, button: ReactElement, children: ReactElement, isModalOpen: boolean , toggleModal: () => void }) {
