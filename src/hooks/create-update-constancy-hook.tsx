@@ -17,13 +17,8 @@ const fetchCreateOrUpdateConstancy = async ({ id, startDate, endDate, userId, co
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            query: id ? `
-                mutation createOrUpdateConstancy($id: String!, $name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateConstancy(id: $id, name: $name, representative: $representative, code: $code, entityType: $entityType)
-                }
-            ` : `
-                mutation createOrUpdateConstancy($name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateConstancy(name: $name, representative: $representative, code: $code, entityType: $entityType)
+            query: id ? `mutation createOrUpdateConstancy($id: String!, $startDate: String!, $endDate: String!, $userId: String!, $clientId: String!, $courseId: String!, $entityType: String!) { createOrUpdateConstancy(id: $id, startDate: $startDate, endDate: $endDate, userId: $userId, clientId: $clientId, courseId: $courseId, entityType: $entityType)}` : `mutation createOrUpdateConstancy($startDate: String!, $endDate: String!, $userId: String!, $clientId: String!, $courseId: String!, $entityType: String!) {
+                  createOrUpdateConstancy(startDate: $startDate, endDate: $endDate, userId: $userId, clientId: $clientId, courseId: $courseId, entityType: $entityType)
                 }
             `,
             variables: { ...variables, entityType: "constancy" },
