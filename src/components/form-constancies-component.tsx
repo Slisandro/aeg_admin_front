@@ -15,6 +15,21 @@ interface ConstanciesFormValues {
     courseId: string
 }
 
+interface ConstanciesDto {
+    id: string,
+    startDate: string,
+    endDate: string,
+    user: {
+        id: string
+    },
+    client: {
+        id: string
+    },
+    course: {
+        id: string
+    }
+}
+
 const ConstancyFormSchema = Yup.object().shape({
     startDate: Yup.string().required('Start date is required'),
     endDate: Yup.string().required('End date is required'),
@@ -26,7 +41,7 @@ const ConstancyFormSchema = Yup.object().shape({
 const date = new Date();
 const formattedDate = date.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
-const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: ConstanciesFormValues }) => {
+const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => void, entity?: ConstanciesDto }) => {
     const { mutate } = useCreateOrUpdateConstancy();
 
     const { refetch: refectAllConstancies } = useAllConstancies();
@@ -36,9 +51,9 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
         id: entity?.id ?? '',
         startDate: entity?.startDate ?? formattedDate,
         endDate: entity?.endDate ?? formattedDate,
-        userId: entity?.userId ?? '',
-        clientId: entity?.clientId ?? '',
-        courseId: entity?.courseId ?? ''
+        userId: entity?.user?.id ?? '',
+        clientId: entity?.client?.id ?? '',
+        courseId: entity?.course?.id ?? ''
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -81,23 +96,23 @@ const ConstancyFormComponent = ({ toggleModal, entity }: { toggleModal: () => vo
                 <div className="flex flex-col lg:flex-row gap-2">
                     <div className="my-2 flex flex-col w-full lg:w-1/3 w-full gap-2">
                         <label htmlFor="endDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.user.name")}</label>
-                        <select name="userId" id="userId" value={values.userId} onChange={handleChange} className={`x-2 py-3 outline-none border-2 rounded-lg ${touched.userId && errors.userId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'}`} onBlur={handleBlur}>
+                        <select name="userId" id="userId" value={values.userId} onChange={handleChange} className={`x-2 py-3 outline-none border-2 rounded-lg ${touched.userId && errors.userId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'} pl-2`} onBlur={handleBlur}>
                             {allUsers?.map(user => <option key={user.id} value={user.id}>{user.name + " - " + user.role}</option>)}
                         </select>
                         {touched.userId && errors.userId && (<p className="text-red-500 pl-2 font-bold">{errors.userId}</p>)}
                     </div>
 
-                    <div className="my-2 flex flex-col w-full md:w-1/3 gap-2">
+                    <div className="my-2 flex flex-col w-full lg:w-1/3 gap-2">
                         <label htmlFor="endDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.client.name")}</label>
-                        <select name="clientId" id="clientId" value={values.clientId} onChange={handleChange} className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.clientId && errors.clientId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'}`} onBlur={handleBlur}>
+                        <select name="clientId" id="clientId" value={values.clientId} onChange={handleChange} className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.clientId && errors.clientId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'} pl-2`} onBlur={handleBlur}>
                             {allClients?.map(client => <option key={client.id} value={client.id}>{client.name}</option>)}
                         </select>
                         {touched.clientId && errors.clientId && (<p className="text-red-500 pl-2 font-bold">{errors.clientId}</p>)}
                     </div>
 
-                    <div className="my-2 flex flex-col w-full md:w-1/3 gap-2">
+                    <div className="my-2 flex flex-col w-full lg:w-1/3 gap-2">
                         <label htmlFor="endDate" className="text-lg font-semibold">{i18n.t("modules.constancies.table.columns.course.name")}</label>
-                        <select name="courseId" id="courseId" value={values.courseId} className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.courseId && errors.courseId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'}`} onBlur={handleBlur}>
+                        <select name="courseId" id="courseId" onChange={handleChange} value={values.courseId} className={`px-2 py-3 outline-none border-2 rounded-lg ${touched.courseId && errors.courseId ? 'border-red-500' : 'border-[rgba(0,0,0,.25)]'} pl-2`} onBlur={handleBlur}>
                             {allCourses?.map(course => <option key={course.id} value={course.id}>{course.name}</option>)}
                         </select>
                         {touched.courseId && errors.courseId && (<p className="text-red-500 pl-2 font-bold">{errors.courseId}</p>)}
