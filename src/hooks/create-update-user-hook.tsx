@@ -15,16 +15,8 @@ const fetchCreateOrUpdateUser = async ({ id, name, role, email }: User) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            query: id ? `
-                mutation createOrUpdateUser($id: String!, $name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateUser(id: $id, name: $name, representative: $representative, code: $code, entityType: $entityType)
-                }
-            ` : `
-                mutation createOrUpdateUser($name: String!, $representative: String!, $code: String!, $entityType: String!) {
-                  createOrUpdateUser(name: $name, representative: $representative, code: $code, entityType: $entityType)
-                }
-            `,
-            variables: { ...variables, entityType: "user" },
+            query: id ? `mutation createOrUpdateUser($id: String!, $name: String!, $role: String!, $email: String!, $entityType: String!, $password: String!) {createOrUpdateUser(id: $id, name: $name, role: $role, email: $email, password: $password, entityType: $entityType)}` : `mutation createOrUpdateUser($name: String!, $role: String!, $email: String!, $entityType: String!, $password: String!) {createOrUpdateUser(name: $name, role: $role, email: $email, password: $password, entityType: $entityType)}`,
+            variables: { ...variables, entityType: "user", password: "DEFAULT_PASS" },
         }),
     });
 
